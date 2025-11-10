@@ -6,7 +6,7 @@ class Konyvek {
       const [rows] = await db.query('SELECT * FROM osszes_konyv');
       return rows;
     } catch (err) {
-      throw err; // hibát a controller fogja kezelni
+      throw err;
     }
   }
 
@@ -46,9 +46,25 @@ class Konyvek {
       }
       catch (err) {
         console.error(err)
-        throw err; // hibát a controller fogja kezelni
+        throw err; 
       }
     }
+
+    static async delete(ISBN) {
+    try{
+      await db.query('DELETE FROM kapcsolo_fordito WHERE ISBN = ?', [ISBN]);
+      await db.query('DELETE FROM kapcsolo_illusztrator WHERE ISBN = ?', [ISBN]);
+      await db.query('DELETE FROM kapcsolo_szerzo WHERE ISBN = ?', [ISBN]);
+      const [result] = await db.query('DELETE FROM termek WHERE ISBN = ?', [ISBN]);
+
+return result.affectedRows > 0;
+
+    }
+    catch(error){
+        console.error(error)
+        throw error;
+    }
+  }
 }
 
 module.exports = Konyvek;

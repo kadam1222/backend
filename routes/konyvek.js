@@ -3,8 +3,10 @@ const router = express.Router();
 const konyvekcontrollers = require('../controllers/konyvekcontrollers');
 
 // GET /orszagok – az összes ország lekérdezése
-router.get('/', konyvekcontrollers.getAllKonyvek);
-router.get('/search', konyvekcontrollers.filter);
-router.delete('/:ISBN', konyvekcontrollers.delete);
 
+router.get('/search', konyvekcontrollers.filter);
+router.get('/ISBN',konyvekcontrollers.getbyISBN)
+
+router.delete('/:ISBN', konyvekcontrollers.delete);
+router.get('/', konyvekcontrollers.getAllKonyvek);
 module.exports = router;

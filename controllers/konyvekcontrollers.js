@@ -10,6 +10,20 @@ exports.getAllKonyvek = async (req, res) => {
   }
 };
 
+exports.getbyISBN = async (req, res) => {
+  try {
+    const ISBN = req.body.ISBN
+    const konyv = await konyvek.getbyISBN(ISBN);
+    if(!konyv){
+      res.status(404).json({message : "Hiba! Nem találtunk a kérésnek megfelelő terméket!😔"})
+    }
+    res.json(konyv);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+};
+
 exports.filter = async (req, res) => {
   try {
     
@@ -45,23 +59,3 @@ exports.delete = async (req, res) =>{
   }
 }
 
-exports.getAllKonyvek = async (req, res) => {
-  try{
-      const id = req.params.id
-      const data = req.body
-            
-      if(!data.nev || !data.regio){
-          return res.status(422).json({error: 'A kód,név és régió kötelező kitölteni'})
-      }
-      const succes = await Orszagok.update(id,data)
-      if(succes){
-      res.status(200).json({message:"Sikeres Frissítés"})
-      }
-      else{
-      res.status(404).json({error: 'Nincs ilyen ország'})
-      }
-      }
-      catch(error){
-      res.status(500).json({error: "Internal Server Error"})
-      }
-};

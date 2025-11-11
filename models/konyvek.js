@@ -10,6 +10,15 @@ class Konyvek {
     }
   }
 
+  static async getbyISBN(ISBN) {
+    try {
+      const [rows] = await db.query('SELECT * FROM osszes_konyv where ISBN LIKE ?', [ISBN]);
+      return rows[0];
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static async filter(cim,kiado,kat,nyelv,szerzo,illusztrator) {
       try{
         const feltetelek_sql = []
@@ -57,14 +66,17 @@ class Konyvek {
       await db.query('DELETE FROM kapcsolo_szerzo WHERE ISBN = ?', [ISBN]);
       const [result] = await db.query('DELETE FROM termek WHERE ISBN = ?', [ISBN]);
 
-return result.affectedRows > 0;
-
+    return result.affectedRows > 0;
     }
     catch(error){
         console.error(error)
         throw error;
     }
+
+    
   }
+
+  
 }
 
 module.exports = Konyvek;

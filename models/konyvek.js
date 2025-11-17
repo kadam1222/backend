@@ -76,6 +76,17 @@ class Konyvek {
     
   }
 
+  static async kategoriak(){
+    try{
+      const [rows] = await db.query('SELECT * FROM kategoria');
+      return rows;
+    }
+    catch(error){
+        console.error(error)
+        throw error;
+    }
+  }
+
   
 }
 

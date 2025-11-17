@@ -59,3 +59,17 @@ exports.delete = async (req, res) =>{
   }
 }
 
+exports.kategoria = async (req,res) => {
+  try{
+    const kateg = await konyvek.kategoriak();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+
+
+

@@ -5,7 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const orszagokRouter = require('./routes/orszagok');
+
 const konyvekRouter = require('./routes/konyvek')
 
 var app = express();
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/orszagok', orszagokRouter);
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/konyvek', konyvekRouter)

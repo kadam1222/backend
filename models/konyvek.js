@@ -19,6 +19,30 @@ class Konyvek {
     }
   }
 
+  static async fokereso(cim,szerzo){
+    try{
+      const feltetelek_sql = []
+      const feltetelek_parameter = []
+
+      if(cim){
+          feltetelek_sql.push("cim LIKE ?")
+          feltetelek_parameter.push(`%${cim}%`)
+      }
+      if(szerzo){
+          feltetelek_sql.push("szerzok LIKE ?")
+          feltetelek_parameter.push(`%${szerzo}%`)
+      }
+      
+      const sikeres = feltetelek_sql.length ? "WHERE " + feltetelek_sql.join(" OR ") : ""
+      const [rows] = await db.query(`SELECT * FROM osszes_konyv ${sikeres}`, feltetelek_parameter);
+      return rows
+    }
+    catch(error){
+        console.error(error)
+        throw error;
+    }
+  }
+
   static async filter(cim,kiado,kat,nyelv,szerzo,illusztrator) {
       try{
         const feltetelek_sql = []

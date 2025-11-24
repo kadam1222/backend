@@ -41,6 +41,21 @@ exports.filter = async (req, res) => {
   }
 };
 
+exports.fokereso = async (req,res) => {
+  try{
+    const cim = req.query.cim
+    const szerzo = req.query.szerzo
+
+    const konyvek_filter = await konyvek.fokereso(cim,szerzo);
+    res.json(konyvek_filter);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+
 exports.delete = async (req, res) =>{
   try{
       const ISBN = req.params.ISBN

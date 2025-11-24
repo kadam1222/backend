@@ -5,6 +5,7 @@ const konyvekcontrollers = require('../controllers/konyvekcontrollers');
 
 
 router.get('/search', konyvekcontrollers.filter);
+router.get('/fokereso', konyvekcontrollers.fokereso);
 router.get('/kategoria', konyvekcontrollers.kategoria);
 router.get('/nyelv', konyvekcontrollers.nyelv);
 router.get('/borito', konyvekcontrollers.borito);

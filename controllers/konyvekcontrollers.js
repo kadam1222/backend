@@ -71,5 +71,40 @@ exports.kategoria = async (req,res) => {
   }
 }
 
+exports.kiado = async (req,res) => {
+  try{
+    const kateg = await konyvek.kiadok();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+exports.nyelv = async (req,res) => {
+  try{
+    const kateg = await konyvek.nyelv();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+exports.borito = async (req,res) => {
+  try{
+    const kateg = await konyvek.borito();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+
+
 
 

@@ -87,6 +87,40 @@ class Konyvek {
     }
   }
 
+  static async kiadok(){
+    try{
+      const [rows] = await db.query('SELECT * FROM kiado');
+      return rows;
+    }
+    catch(error){
+        console.error(error)
+        throw error;
+    }
+  }
+
+  static async nyelv(){
+    try{
+      const [rows] = await db.query('SELECT * FROM nyelv');
+      return rows;
+    }
+    catch(error){
+        console.error(error)
+        throw error;
+    }
+  }
+ static async borito(){
+    try{
+      const [rows] = await db.query('SELECT * FROM borito');
+      return rows;
+    }
+    catch(error){
+        console.error(error)
+        throw error;
+    }
+  }
+
+ 
+
   
 }
 

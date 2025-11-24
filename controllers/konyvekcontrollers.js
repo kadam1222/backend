@@ -26,12 +26,9 @@ exports.getbyISBN = async (req, res) => {
 
 exports.filter = async (req, res) => {
   try {
-    
-    const cim = req.query.cim
     const kiado = req.query.kiado
     const kategoria = req.query.kat
     const nyelv = req.query.nyelv
-    const szerzo = req.query.szerz
     const illusztrator = req.query.illusz
     const konyvek_filter = await konyvek.filter(cim,kiado,kategoria,nyelv,szerzo,illusztrator);
     res.json(konyvek_filter); 

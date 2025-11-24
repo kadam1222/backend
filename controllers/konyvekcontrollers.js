@@ -26,12 +26,9 @@ exports.getbyISBN = async (req, res) => {
 
 exports.filter = async (req, res) => {
   try {
-    
-    const cim = req.query.cim
     const kiado = req.query.kiado
     const kategoria = req.query.kat
     const nyelv = req.query.nyelv
-    const szerzo = req.query.szerz
     const illusztrator = req.query.illusz
     const konyvek_filter = await konyvek.filter(cim,kiado,kategoria,nyelv,szerzo,illusztrator);
     res.json(konyvek_filter); 
@@ -40,6 +37,21 @@ exports.filter = async (req, res) => {
     res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
   }
 };
+
+exports.fokereso = async (req,res) => {
+  try{
+    const cim = req.query.cim
+    const szerzo = req.query.szerzo
+
+    const konyvek_filter = await konyvek.fokereso(cim,szerzo);
+    res.json(konyvek_filter);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
 
 exports.delete = async (req, res) =>{
   try{
@@ -70,6 +82,41 @@ exports.kategoria = async (req,res) => {
     res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
   }
 }
+
+exports.kiado = async (req,res) => {
+  try{
+    const kateg = await konyvek.kiadok();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+exports.nyelv = async (req,res) => {
+  try{
+    const kateg = await konyvek.nyelv();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+exports.borito = async (req,res) => {
+  try{
+    const kateg = await konyvek.borito();
+    res.json(kateg);
+  }
+  catch(err)
+  {
+    console.error(err);
+    res.status(500).json({ message: 'Hiba történt a könyvek lekérdezésekor (SERVER ERROR)' });
+  }
+}
+
 
 
 
